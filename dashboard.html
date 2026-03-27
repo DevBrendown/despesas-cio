@@ -1,6 +1,7 @@
 <!-- dashboard.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,12 +12,27 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <link rel="icon" href="img/logotipo.png" type="image/png" />
 </head>
+
 <body class="container">
   <header>
-    <h1>Dashboard - CIO</h1>
-    <button id="btnPDF" class="btn-pdf">Baixar Dashboard em PDF</button>
-    <button class="btn-pdf" onclick="voltar()">Voltar</button>
+    <div class="header-info">
+      <img src="img/logotipo.png" alt="Logo" class="header-logo">
+      <h1>Dashboard CIO</h1>
+    </div>
+
+    <div class="header-actions">
+      <button id="btnPDF" class="btn-header btn-blue">
+        Baixar PDF
+      </button>
+      <button class="btn-header btn-green">
+        Planilha
+      </button>
+      <button class="btn-header btn-outline" onclick="voltar()">
+        Voltar
+      </button>
+    </div>
   </header>
+
   <div id="totalMensal" class="card-total-mensal"></div>
 
   <h2>Soma por Despesas</h2>
@@ -30,4 +46,5 @@
 
   <script src="js/dashboard.js"></script>
 </body>
+
 </html>

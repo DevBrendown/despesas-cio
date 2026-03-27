@@ -1,4 +1,4 @@
-const API = "https://script.google.com/macros/s/AKfycbxqZ-T43eqzijcVYaOTDjXGQAWIVSwLaKVruhOnYyVSXKr7XFRE0qG2O5x5C2ZVhHpdLA/exec";
+const API = "https://script.google.com/macros/s/AKfycbxd63CJEZFzY1qxQY9Q302DSHwd_FAW4QIKeXQuxbL6YVutJHHzup-JXKhcnscpUooBIw/exec";
 const params = new URLSearchParams(window.location.search);
 const tipo = params.get("tipo");
 
@@ -11,12 +11,18 @@ async function carregarSolicitacoes() {
   const lista = document.getElementById("lista");
 
   dados.forEach(item => {
+    const dataFormatada = item.data ? new Date(item.data).toLocaleDateString('pt-BR') : "—";
+
     lista.innerHTML += `
       <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <span class="tag-ceem">${item.ceemResponsavel || "Sem CEEM"}</span>
+            <span class="card-date">${dataFormatada}</span>
+        </div>
         <h3>Ocorrência ${item.ocorrencia}</h3>
         <p><b>Número NF:</b> ${item.numeroNF || "—"}</p>
         <p><b>Valor:</b> R$ ${item.valorNF}</p>
-        ${item.linkNF ? `<a href="${item.linkNF}" target="_blank">Ver Documento</a>` : ""}
+        ${item.linkNF ? `<a href="${item.linkNF}" target="_blank" class="btn-documento">Ver Documento</a>` : ""}
       </div>
     `;
   });
@@ -34,6 +40,6 @@ document.getElementById("search").addEventListener("input", () => {
 });
 
 function voltar() {
-    window.location.href = "index.html"; 
+  window.location.href = "index.html";
 }
 

@@ -39,48 +39,33 @@ document.getElementById("search").addEventListener("input", () => {
   });
 });
 
-/* MARQUEE */
-async function carregarMarquee() {
-  const marquee = document.getElementById("marqueeMsg");
-
-  try {
-    const resposta = await fetch(API);
-    const dados = await resposta.json();
-
-    marquee.textContent = dados.length
-      ? dados.map(i => i.titulo).join(" • ")
-      : "Nenhum tópico encontrado...";
-  } catch {
-    marquee.textContent = "Erro ao carregar tópicos...";
-  }
-}
-
-carregarMarquee();
 
 /* DASHBOARD */
 function dashboard() {
   window.location.href = "dashboard.html";
 }
 
-function toggleSubmenu(element) {
-  const menuItem = element.parentElement;
-
-  document.querySelectorAll(".menu-item").forEach(item => {
-    if (item !== menuItem) item.classList.remove("active");
-  });
-
-  menuItem.classList.toggle("active");
+function filtroDespesas() {
+  window.location.href = "filtro.html";
 }
 
-function toggleSubSubmenu(element) {
-  const submenuItem = element.parentElement;
+// --- FUNÇÕES DO BANNER DE ATUALIZAÇÕES ---
 
-  element.closest(".submenu")
-    .querySelectorAll(".submenu-item")
-    .forEach(item => {
-      if (item !== submenuItem) item.classList.remove("active");
-    });
+const BANNER_VIEWED_KEY = 'updateBannerViewed'; // Chave para armazenar no localStorage
 
-  submenuItem.classList.toggle("active");
+function showUpdateBanner() {
+  const banner = document.getElementById('updateBanner');
+  // Se o usuário ainda não viu (ou a chave não existe)
+  if (!localStorage.getItem(BANNER_VIEWED_KEY)) {
+    banner.classList.add('show');
+  }
 }
 
+function closeUpdateBanner() {
+  const banner = document.getElementById('updateBanner');
+  banner.classList.remove('show');
+  localStorage.setItem(BANNER_VIEWED_KEY, 'true'); // Marca como visto
+}
+
+// Chame esta função quando a página for totalmente carregada
+document.addEventListener('DOMContentLoaded', showUpdateBanner);
